@@ -14,6 +14,6 @@ const register = async (req,res)=>{
     const hash = bcrypt.hashSync(password, 10);
         user =await User.create({name,email,password:hash})
         Token(res,user)
-        res.status(200).json({success:true,msg:"Registered Successfully"})
+        res.status(200).json({success:true,msg:"Registered Successfully",user})
 }
 export default register
