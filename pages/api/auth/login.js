@@ -18,7 +18,7 @@ const login = async (req, res) => {
   console.log(isMatched);
   if(isMatched){
       Token(res, user);
-      res.status(200).json({ success: true, msg: "Login Successfully" });
+      res.status(200).json({ success: true, msg: "Login Successfully" ,user});
   }
   else return errorHandler(res,400,"Please enter valid credentials")
 };

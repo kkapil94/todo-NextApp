@@ -1,12 +1,18 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
-import { createContext, useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const Context = createContext({user:{}})
+export const Context = createContext({user:{}})
 
 export const ContextProvider = ({children}) =>{
     const [user,setUser] = useState()
+    useEffect(()=>{
+       fetch("/api/auth/me")
+       .then(res=>res.json()).then(data=>{if(data.success);setUser(data.user)})
+    },[])
     return (
         <Context.Provider value={{user,setUser}}>
             {children}
@@ -15,11 +21,31 @@ export const ContextProvider = ({children}) =>{
 }
 
 
+
 export const LogoutBtn = ()=>{
-    const {user} = useContext(Context)
+    const route = useRouter()
+    const {user,setUser} = useContext(Context)
+    const logout =async ()=>{
+        await axios.get("/api/auth/logout");
+        setUser(null)
+        route.push("/login")
+        // console.log(null);
+    }
     return (
-        user?(<button >Logout</button>):
+        user?(<button  className='text-lg text-[#ffcc66] font-extrabold hover:underline ' onClick={logout}>Logout</button>):
         <Link href={"/login"} className='text-lg text-[#ffcc66] font-extrabold hover:underline '>Login</Link>
+    )
+}
+
+export const delBtn = ({id})=>{
+    const handleDel =async ()=>{
+       const data =await axios.delete("api/auth/me")
+    }
+    return (
+    <>
+        <input type="checkbox" name="" id="" className="mr-6 cursor-pointer"  />
+        <button className="text-md p-2 rounded-md font-semibold text-[#ffcc66] bg-[#1d1d1d]" onClick={handleDel}>Delete</button>
+    </>
     )
 }
 

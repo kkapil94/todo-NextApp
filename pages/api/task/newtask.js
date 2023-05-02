@@ -10,11 +10,12 @@ const newtask =async (req,res)=>{
     return errorHandler(res,400,"only post req is allowed");
 
     const {title,task} = req.body
+    console.log(title,task);
     if(!title || !task) return errorHandler(res,400,"all fields are mandatory")
     await connect()
     const user = await isAuthenticate(req)
     const newTask = await Task.create({title,task,user:user._id})
-    console.log(task);
+    // console.log(task);
     res.status(200).json({success:true,newTask})
 }
 export default newtask

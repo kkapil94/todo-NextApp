@@ -12,7 +12,6 @@ const mytask =async (req,res)=>{
     const user =await isAuthenticate(req)
     if(!user) return errorHandler(res,400,"Please login first")
     const tasks = await Task.find({user})
-    console.log(tasks);
     res.status(200).json({success:true,tasks})
 }
 export default mytask
