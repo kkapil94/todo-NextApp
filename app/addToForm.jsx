@@ -1,10 +1,11 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-export default function addToForm() {
+export default function AddToForm() {
   const [todo,setTodo] = useState({})
-  // const {user,setUser} = useContext(Context)
+  const router = useRouter()
   const handleChange = (e)=>{
     setTodo({...todo,[e.target.name]:e.target.value})
   }
@@ -13,7 +14,8 @@ export default function addToForm() {
     e.preventDefault()
     const {data} =await axios.post("/api/task/newtask",todo);
     if(data.success){
-      setTodo({})
+      setTodo({title:"",task:""})
+      router.refresh()
     }
    }
   return (

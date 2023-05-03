@@ -1,4 +1,7 @@
-export  const TodoItem = ({title,task}) => {
+
+import { DelBtn } from "./clients"
+
+export  const TodoItem = ({title,task,id}) => {
     return (
         <>
             <div className="p-5 border-2 flex justify-between items-center">
@@ -7,8 +10,7 @@ export  const TodoItem = ({title,task}) => {
                 <p className="text-md font-medium">{task}</p>
                 </div>
                 <div>
-                    <input type="checkbox" name="" id="" className="mr-6 cursor-pointer"  />
-                    <button className="text-md p-2 rounded-md font-semibold text-[#ffcc66] bg-[#1d1d1d]">Delete</button>
+                    <DelBtn id={id}/>
                 </div>
             </div>
         </>

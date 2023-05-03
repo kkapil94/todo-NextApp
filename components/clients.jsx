@@ -37,9 +37,11 @@ export const LogoutBtn = ()=>{
     )
 }
 
-export const delBtn = ({id})=>{
+export const DelBtn = ({id})=>{
+    const route = useRouter()
     const handleDel =async ()=>{
-       const data =await axios.delete("api/auth/me")
+       const data =await axios.delete(`/api/task/${id}`);
+       route.refresh()
     }
     return (
     <>

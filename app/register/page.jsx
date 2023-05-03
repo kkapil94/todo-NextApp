@@ -6,7 +6,7 @@ import { Context } from "@/components/clients";
 import {redirect} from "next/navigation"
 import axios from "axios";
 
-export default function page() {
+export default function Page() {
   const [cred,setCred] = useState({})
   const {user,setUser} = useContext(Context)
   const handleChange = (e)=>{
